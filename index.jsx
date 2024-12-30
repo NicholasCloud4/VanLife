@@ -12,9 +12,24 @@ import Reviews from './pages/Host/Reviews';
 
 
 import "./server"
+import HostLayout from './components/HostLayout';
 
 
 function App() {
+
+    /**
+   * Challenge: Make the HostLayout component!
+   * The HostLayout should use Links to navigate to the following
+   * routes: 
+   *    * Dashboard ("/host")
+   *    * Income ("/host/income")
+   *    * Reviews ("/host/reviews")
+   * Then replace the parent "/host" route's element below with the
+   * new HostLayout component you made.
+   * 
+   * NOTE: The dashboard route/page will be gone for now, but don't fret.
+   * We'll be fixing that in the next lesson.
+   */
 
     return (
         <BrowserRouter>
@@ -25,17 +40,8 @@ function App() {
                     <Route path="/vans" element={<Vans />} />
                     <Route path="/vans/:id" element={<VanDetail />} />
 
-                    {/* 
-          Challenge: 
-          1. Turn the "/host" path into a parent route and nest
-          "/host/income" and "/host/reviews" as children routes.
-          Then try entering "/host/income" in the URL and see what
-          happens.
-          
-          2. See if you can figure out why it did what it did.
-          */}
-
-                    <Route path='/host' element={<Dashboard />} >
+                    <Route path='/host' element={<HostLayout />} >
+                        <Route path="/host" element={<Dashboard />} />
                         <Route path='/host/income' element={<Income />} />
                         <Route path='/host/reviews' element={<Reviews />} />
                     </Route>
