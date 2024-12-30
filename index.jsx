@@ -13,36 +13,34 @@ import Reviews from './pages/Host/Reviews';
 
 import "./server"
 
-/**
- * Challenge:
- * 1. Add a "Host" link to the Navbar that takes you to the "/host" path
- * 2. Create the following components in the pages/Host folder:
- *    a. Dashboard ("/host")
- *    b. Income ("/host/income")
- *    c. Reviews ("/host/reviews")
- *    These components can just have an h1 for now that says, e.g.
- *    "Host Dashboard here".
- * 3. Set up routes for each of these pages in the Routes below. FOR NOW,
- *    don't worry about nesting anything, you can just put them on the same
- *    level as the "/vans", etc. routes below.
- */
-
 
 function App() {
 
     return (
         <BrowserRouter>
-
             <Routes>
                 <Route element={<Layout />}>
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/vans" element={<Vans />} />
                     <Route path="/vans/:id" element={<VanDetail />} />
-                    <Route path='/host' element={<Dashboard />} />
-                    <Route path='/host/income' element={<Income />} />
-                    <Route path='/host/reviews' element={<Reviews />} />
+
+                    {/* 
+          Challenge: 
+          1. Turn the "/host" path into a parent route and nest
+          "/host/income" and "/host/reviews" as children routes.
+          Then try entering "/host/income" in the URL and see what
+          happens.
+          
+          2. See if you can figure out why it did what it did.
+          */}
+
+                    <Route path='/host' element={<Dashboard />} >
+                        <Route path='/host/income' element={<Income />} />
+                        <Route path='/host/reviews' element={<Reviews />} />
+                    </Route>
                 </Route>
+
             </Routes>
         </BrowserRouter>
     )
