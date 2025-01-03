@@ -22,17 +22,6 @@ export default function HostVanDetail() {
         return <h1>Loading...</h1>
     }
 
-    /**
-     * Mini challenge: Try to make it so the "Back to all vans"
-     * Link takes people BACK one route.
-     * 
-     * MAJOR HINT: we just talked about how `cd .` and `cd ..`
-     * work in a terminal, and mentioned how `.` represents
-     * the current route
-     * 
-     * MAJOR CAVEAT: it's not going to do what you think it'll
-     * do, but we'll learn why and see an easy fix 🤭
-     */
 
     return (
         <section>
@@ -64,8 +53,17 @@ export default function HostVanDetail() {
                     <NavLink to="photos" style={({ isActive }) => isActive ? activeStyles : undefined}>Photos</NavLink>
                 </nav>
 
-                <Outlet />
+                <Outlet context={{ currentVan }} />
             </div>
         </section>
     )
 }
+
+/**
+     * Challenge: check out the docs linked in the slide, and see if you
+     * can implement the Outlet Context feature it talks about.
+     * 
+     * Part of this challenge will require you to (finally) build out those
+     * nested components. Again, if you don't need CSS practice, you can
+     * skip the styling part, and I'll handle that for you.
+     */
