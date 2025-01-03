@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 
 /**
@@ -8,8 +8,20 @@ import { Link } from 'react-router-dom'
  */
 
 export default function Vans() {
+    /**
+     * Challenge: access the search params in this component
+     * 1. Using the hook from react-router-dom, set a variable
+     *    called `searchParams`
+     * 2. Save the value of the `type` parameter (from the
+     *    `searchParams` object) to a variable called `typeFilter`
+     * 3. Log the value of the `typeFilter` to the console
+     */
 
     const [vans, setVans] = React.useState([])
+    const [searchParams, setSearchParams] = useSearchParams()
+    let typeFilter = (searchParams.get("type"));
+    console.log(typeFilter);
+
 
     React.useEffect(() => {
         fetch("/api/vans")
