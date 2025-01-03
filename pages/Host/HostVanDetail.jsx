@@ -1,7 +1,14 @@
 import React from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams, Link, Outlet, NavLink } from "react-router-dom"
 
 export default function HostVanDetail() {
+
+    const activeStyles = {
+        fontWeight: "bold",
+        textDecoration: "underline",
+        color: "#161616"
+    }
+
     const { id } = useParams()
     const [currentVan, setCurrentVan] = React.useState(null)
 
@@ -49,6 +56,15 @@ export default function HostVanDetail() {
                         <h4>${currentVan.price}/day</h4>
                     </div>
                 </div>
+
+                <nav className="host-van-detail-nav">
+                    {/* Your links go here */}
+                    <NavLink to="." end style={({ isActive }) => isActive ? activeStyles : undefined}>Details</NavLink>
+                    <NavLink to="pricing" style={({ isActive }) => isActive ? activeStyles : undefined}>Pricing</NavLink>
+                    <NavLink to="photos" style={({ isActive }) => isActive ? activeStyles : undefined}>Photos</NavLink>
+                </nav>
+
+                <Outlet />
             </div>
         </section>
     )
