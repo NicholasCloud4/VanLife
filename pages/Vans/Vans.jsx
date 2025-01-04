@@ -32,10 +32,17 @@ export default function Vans() {
     ))
 
     /**
-     * Challenge: change the Links to buttons and use the
-     * setSearchParams function to set the search params
-     * when the buttons are clicked. Keep all the classNames
-     * the same.
+     * Challenges:
+     * 1. Conditionally render the "Clear filter" button only if
+     *    there's a `type` filter currently applied in the search params
+     * 
+     * 2. On just the 3 filter buttons (not the Clear filter button),
+     *    conditionally render the className "selected" if the
+     *    typeFilter value equals the value that button sets it to.
+     *    (We don't have a variable for that, so it'll be a hard-coded
+     *    string).
+     * 
+     *    Hint: `...${typeFilter === "simple" ? ...}`
      */
 
     return (
@@ -43,10 +50,10 @@ export default function Vans() {
             <div className="van-list-container">
                 <h1>Explore our van options</h1>
                 <div className="van-list-filter-buttons">
-                    <button className='van-type simple' onClick={() => setSearchParams({ type: "simple" })}>Simple</button>
-                    <button className='van-type luxury' onClick={() => setSearchParams({ type: "luxury" })}>Luxury</button>
-                    <button className='van-type rugged' onClick={() => setSearchParams({ type: "rugged" })}>Rugged</button>
-                    <button className='van-type clear-filters' onClick={() => setSearchParams({})}>Clear Filter</button>
+                    <button className={`van-type simple ${typeFilter === "simple" ? "selected" : ""}`} onClick={() => setSearchParams({ type: "simple" })}>Simple</button>
+                    <button className={`van-type simple ${typeFilter === "luxury" ? "selected" : ""}`} onClick={() => setSearchParams({ type: "luxury" })}>Luxury</button>
+                    <button className={`van-type rugged ${typeFilter === "rugged" ? "selected" : ""}`} onClick={() => setSearchParams({ type: "rugged" })}>Rugged</button>
+                    {typeFilter ? <button className='van-type clear-filters' onClick={() => setSearchParams({})}>Clear Filter</button> : null}
                 </div>
                 <div className="van-list">
                     {vanElements}
