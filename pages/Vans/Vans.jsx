@@ -32,16 +32,10 @@ export default function Vans() {
     ))
 
     /**
-     * Challenge: add links to filter the vans by type. Use a hard-coded
-     * `to` string like we just practiced. The types are "simple", 
-     * "luxury", and "rugged".
-     * 
-     * For now, give the Links a className of `van-type simple` (and
-     * manually replace "simple" with "luxury" and "rugged" for 
-     * the Links that filter by those types.)
-     * 
-     * Include a Link to clear the filters. Its className should be
-     * `van-type clear-filters`
+     * Challenge: change the Links to buttons and use the
+     * setSearchParams function to set the search params
+     * when the buttons are clicked. Keep all the classNames
+     * the same.
      */
 
     return (
@@ -49,11 +43,10 @@ export default function Vans() {
             <div className="van-list-container">
                 <h1>Explore our van options</h1>
                 <div className="van-list-filter-buttons">
-                    <Link className='van-type simple' to="?type=simple">Simple</Link>
-                    <Link className='van-type luxury' to="?type=luxury">Luxury</Link>
-                    <Link className='van-type rugged' to="?type=rugged">Rugged</Link>
-                    <Link className='van-type clear-filters' to={"."}>Clear Filter</Link>
-
+                    <button className='van-type simple' onClick={() => setSearchParams({ type: "simple" })}>Simple</button>
+                    <button className='van-type luxury' onClick={() => setSearchParams({ type: "luxury" })}>Luxury</button>
+                    <button className='van-type rugged' onClick={() => setSearchParams({ type: "rugged" })}>Rugged</button>
+                    <button className='van-type clear-filters' onClick={() => setSearchParams({})}>Clear Filter</button>
                 </div>
                 <div className="van-list">
                     {vanElements}
