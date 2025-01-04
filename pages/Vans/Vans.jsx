@@ -2,20 +2,7 @@ import React, { useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
 
-/**
- * Challenge: Wrap the contents of the "van-tile" div in a 
- * Link that sends the user to `/vans/${van-id-here}`.
- */
-
 export default function Vans() {
-    /**
-     * Challenge: access the search params in this component
-     * 1. Using the hook from react-router-dom, set a variable
-     *    called `searchParams`
-     * 2. Save the value of the `type` parameter (from the
-     *    `searchParams` object) to a variable called `typeFilter`
-     * 3. Log the value of the `typeFilter` to the console
-     */
 
     const [vans, setVans] = React.useState([])
     const [searchParams, setSearchParams] = useSearchParams()
@@ -29,7 +16,15 @@ export default function Vans() {
             .then(data => setVans(data.vans))
     }, [])
 
-    const vanElements = vans.map((van) => (
+    /**
+     * Challenge: filter the list of vans based on the `typeFilter`
+     * we created earlier. For now, just enter "simple", "luxury",
+     * or "rugged" into the search param in the URL to check your work.
+     */
+
+    const displayedVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans
+
+    const vanElements = displayedVans.map((van) => (
         <div key={van.id} className="van-tile">
             <Link to={`/vans/${van.id}`}>
                 <img src={van.imageUrl} />
