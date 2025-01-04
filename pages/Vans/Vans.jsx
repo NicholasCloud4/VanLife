@@ -16,12 +16,6 @@ export default function Vans() {
             .then(data => setVans(data.vans))
     }, [])
 
-    /**
-     * Challenge: filter the list of vans based on the `typeFilter`
-     * we created earlier. For now, just enter "simple", "luxury",
-     * or "rugged" into the search param in the URL to check your work.
-     */
-
     const displayedVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans
 
     const vanElements = displayedVans.map((van) => (
@@ -37,10 +31,30 @@ export default function Vans() {
         </div>
     ))
 
+    /**
+     * Challenge: add links to filter the vans by type. Use a hard-coded
+     * `to` string like we just practiced. The types are "simple", 
+     * "luxury", and "rugged".
+     * 
+     * For now, give the Links a className of `van-type simple` (and
+     * manually replace "simple" with "luxury" and "rugged" for 
+     * the Links that filter by those types.)
+     * 
+     * Include a Link to clear the filters. Its className should be
+     * `van-type clear-filters`
+     */
+
     return (
         <>
             <div className="van-list-container">
                 <h1>Explore our van options</h1>
+                <div className="van-list-filter-buttons">
+                    <Link className='van-type simple' to="?type=simple">Simple</Link>
+                    <Link className='van-type luxury' to="?type=luxury">Luxury</Link>
+                    <Link className='van-type rugged' to="?type=rugged">Rugged</Link>
+                    <Link className='van-type clear-filters' to={"."}>Clear Filter</Link>
+
+                </div>
                 <div className="van-list">
                     {vanElements}
                 </div>
