@@ -30,7 +30,6 @@ export default function Vans() {
                 setLoading(false)
             }
         }
-
         loadVans()
 
     }, [])

@@ -18,17 +18,7 @@ import HostVanPhotos from './pages/Host/HostVanPhotos';
 import "./server"
 import HostVanInfo from './pages/Host/HostVanInfo';
 import NotFound from './pages/NotFound';
-
-
-/**
- * Challenge: Create a 404 page.
- * 
- * 1. Create a new component in the pages dir called "NotFound"
- * 2. Add the elements from the design. Style it if you want.
- * 3. Add a "catch-all" route as a nested route under the Route. 
- *    (It doesn't matter where amongst the children it is.)
- * 4. Use the NotFound component as the element for that catch-all route
- */
+import Login from './pages/Login';
 
 
 function App() {
@@ -39,6 +29,7 @@ function App() {
                 <Route path='/' element={<Layout />}>
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
+                    <Route path="login" element={<Login />} />
                     <Route path="vans" element={<Vans />} />
                     <Route path="vans/:id" element={<VanDetail />} />
 
