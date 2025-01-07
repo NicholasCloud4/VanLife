@@ -7,14 +7,19 @@ export default function Vans() {
 
     const [vans, setVans] = React.useState([])
     const [searchParams, setSearchParams] = useSearchParams()
+    const [loading, setLoading] = React.useState(false)
+
+
     let typeFilter = (searchParams.get("type"));
     console.log(typeFilter);
 
 
     React.useEffect(() => {
         async function loadVans() {
+            setLoading(true)
             const data = await getVans()
             setVans(data)
+            setLoading(false)
         }
 
         loadVans()
@@ -22,12 +27,6 @@ export default function Vans() {
     }, [])
 
     const displayedVans = typeFilter ? vans.filter(van => van.type === typeFilter) : vans
-
-    /**
-     * Mini-challenge: change the absolute path in the Link below
-     * to a relative path. There's also one still in the HostVans.jsx
-     * file that you should change, too.
-     */
 
     const vanElements = displayedVans.map((van) => (
         <div key={van.id} className="van-tile">
@@ -42,6 +41,9 @@ export default function Vans() {
         </div>
     ))
 
+    if (loading) {
+        return <h1>Loading...</h1>
+    }
 
     return (
         <>
