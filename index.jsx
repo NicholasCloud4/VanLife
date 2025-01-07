@@ -19,9 +19,19 @@ import "./server"
 import HostVanInfo from './pages/Host/HostVanInfo';
 import NotFound from './pages/NotFound';
 import Login from './pages/Login';
+import AuthRequired from './components/AuthRequired';
 
 
 function App() {
+
+    /**
+   * Challenge: Create the AuthRequired Layout Route to protect
+   * all the /host routes.
+   * 
+   * For now, just use `const authenticated = false`
+   * to determine the authenticated status of the user, and
+   * either send them to the /login route, or render the Outlet
+   */
 
     return (
         <BrowserRouter>
@@ -33,15 +43,17 @@ function App() {
                     <Route path="vans" element={<Vans />} />
                     <Route path="vans/:id" element={<VanDetail />} />
 
-                    <Route path='host' element={<HostLayout />} >
-                        <Route index element={<Dashboard />} />
-                        <Route path='income' element={<Income />} />
-                        <Route path='reviews' element={<Reviews />} />
-                        <Route path='vans' element={<HostVans />} />
-                        <Route path='vans/:id' element={<HostVanDetail />} >
-                            <Route index element={<HostVanInfo />} />
-                            <Route path='pricing' element={<HostVanPricing />} />
-                            <Route path='photos' element={<HostVanPhotos />} />
+                    <Route element={<AuthRequired />}>
+                        <Route path='host' element={<HostLayout />} >
+                            <Route index element={<Dashboard />} />
+                            <Route path='income' element={<Income />} />
+                            <Route path='reviews' element={<Reviews />} />
+                            <Route path='vans' element={<HostVans />} />
+                            <Route path='vans/:id' element={<HostVanDetail />} >
+                                <Route index element={<HostVanInfo />} />
+                                <Route path='pricing' element={<HostVanPricing />} />
+                                <Route path='photos' element={<HostVanPhotos />} />
+                            </Route>
                         </Route>
                     </Route>
                     <Route path="*" element={<NotFound />} />
