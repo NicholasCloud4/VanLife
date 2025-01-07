@@ -1,5 +1,20 @@
 import React from "react"
 import { useNavigate, useLocation } from "react-router-dom"
+import { loginUser } from "../api"
+
+/**
+ * Challenge: hook up our form so it (halfway) works.
+ * 
+ * 1. Pull in the `loginUser` function from the api.js file
+ * 2. Call loginUser when the form is submitted and log the
+ *    data that comes back. Use "b@b.com" as the username and
+ *    "p123" as the password.
+ * 
+ *    NOTE: loginUser returns a promise, so you'll need
+ *    a .then(data => {...}) to access the data, or use
+ *    a separate aync function defined inside handleSubmit
+ * 3. TBA
+ */
 
 export default function Login() {
     const [loginFormData, setLoginFormData] = React.useState({ email: "", password: "" })
@@ -9,6 +24,8 @@ export default function Login() {
     function handleSubmit(e) {
         e.preventDefault()
         console.log(loginFormData)
+        loginUser(loginFormData)
+            .then(data => console.log(data))
     }
 
     function handleChange(e) {
@@ -18,11 +35,6 @@ export default function Login() {
             [name]: value
         }))
     }
-
-    /**
-     * Challenge: If location.state.message exists, 
-     * display it above the <h1>
-     */
 
     return (
         <div className="login-container">
