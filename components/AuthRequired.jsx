@@ -5,7 +5,7 @@ export default function AuthRequired() {
     const authenticated = false;
 
     if (authenticated === false) {
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" state={{ message: "You must log in to view this page" }} />;
     } else {
         return <Outlet />
     }
