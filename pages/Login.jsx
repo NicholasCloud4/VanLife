@@ -3,21 +3,10 @@ import { useNavigate, useLocation } from "react-router-dom"
 import { loginUser } from "../api"
 
 /**
- * Challenge: Code the sad path 🙁
- * 3. Add a `status` state and default it to "idle". When the 
- *    login form begins submitting, set it to "submitting". When
- *    it's done submitting and the data has come back, set it 
- *    to "idle" again
- * 4. Disable the button when the `status` state is "submitting"
- *    (this may require some Googling if you haven't done this
- *    before).
- * 5. Add an `error` state and default it to `null`. When the
- *    form is submitted, reset the errors to `null`. If there's
- *    an error from `loginUser` (add a .catch(err => {...}) in 
- *    the promise chain), set the error to the error that 
- *    comes back.
- * 6. Display the error.message below the `h1` if there's ever
- *    an error in state
+ * Challenge: read up on the useNavigate hook from the
+ * docs and implement it in the VanLife app. When the user
+ * successfully logs in, they should be redirected to the 
+ * /host route.
  */
 
 export default function Login() {
@@ -26,6 +15,7 @@ export default function Login() {
     console.log(location)
     const [status, setStatus] = React.useState("idle")
     const [error, setError] = React.useState(null)
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -34,12 +24,15 @@ export default function Login() {
             .then(data => {
                 console.log(data)
                 setError(null)
+                console.log('About to navigate to /host...')
+                navigate("/host")
             })
             .catch(err => {
                 setError(err)
             })
             .finally(() => {
                 setStatus("idle")
+
             })
     }
 
@@ -74,7 +67,7 @@ export default function Login() {
                     placeholder="Password"
                     value={loginFormData.password}
                 />
-                <button disabled={status === "submitting"} >
+                <button disabled={status === "submitting"}>
                     {status === "submitting" ? "Logging in..." : "Log in"}
                 </button>
             </form>
