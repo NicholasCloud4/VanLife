@@ -22,10 +22,10 @@ export default function Login() {
         setStatus("submitting")
         loginUser(loginFormData)
             .then(data => {
-                console.log(data)
+                // console.log(data)
                 setError(null)
-                console.log('About to navigate to /host...')
-                navigate("/host")
+                localStorage.setItem("loggedin", true)
+                navigate("/host", { replace: true })
             })
             .catch(err => {
                 setError(err)
